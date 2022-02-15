@@ -1,0 +1,11 @@
+.container__sort{
+    
+}
+.sort__container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
+.sort__container__title{
+}

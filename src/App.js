@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import FullProductsTable from './components/FullProductsTable'
-import Tabs from 'react-bootstrap/Tabs'
-import Tab from 'react-bootstrap/Tab'
-import Navbar from 'react-bootstrap/Navbar'
-import { Container } from 'react-bootstrap';
-import { Nav } from 'react-bootstrap';
-
-
+import {
+  Container,
+  Navbar,
+  Tab,
+  Tabs,
+} from 'react-bootstrap';
 import "./App.css"
+import SortContainer from './components/SortContainer/SortContainer';
+import FindContainer from './components/FindContainer/FindContainer';
 
 export default class App extends Component {
   static displayName = App.name;
@@ -22,7 +23,21 @@ export default class App extends Component {
           </Container>
         </Navbar>
 
-        <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3 Tabs">
+
+        <div className="inputs">
+          <h1 className='container__title'>Поиск в таблице</h1>
+          <div className="inputs__container">
+            <SortContainer />
+            <FindContainer />
+          </div>
+        </div>
+
+
+        <Tabs defaultActiveKey="profile"
+          id="uncontrolled-tab-example"
+          className="mb-3 Tabs"
+          style={{ marginTop: "60px" }}
+        >
           <Tab eventKey="home" title="Полный список товаров">
             <FullProductsTable APIUrl="https://localhost:44396/product" />
           </Tab>
