@@ -7,7 +7,7 @@ const SortContainer = () => {
         <div className='container__sort'>
             <div className='sort__container'>
                 <h3 className='sort__container__title'>Отсортировать по столбцу:</h3>
-                <MySelect />
+                <MySelect defaultSelect="Выберете столбец" />
             </div>
         </div>
     );

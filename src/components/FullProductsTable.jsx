@@ -3,12 +3,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from 'react-bootstrap/Table'
 import { useState, useEffect } from 'react';
 
-const FullProductsTable = (props) => {
+const FullProductsTable = ({ tableColumnName, APIUrl }) => {
     const [users, setUsers] = useState([]);
     const [isLoaded, SetisLoaded] = useState(true);
 
+    console.log(tableColumnName)
+    console.log(APIUrl)
+
     const fetchData = async () => {
-        let response = await fetch(props.APIUrl, { method: "GET" });
+        let response = await fetch(APIUrl, { method: "GET" });
         console.log(response);
         let data = await response.json();
         setUsers(data);
@@ -33,19 +36,13 @@ const FullProductsTable = (props) => {
                     style={{ marginTop: "10px" }}>
                     <thead>
                         <tr>
-                            <th>Название продукта</th>
-                            <th>Дата изготовления продукта</th>
-                            <th>Дата упаковки продукта</th>
-                            <th>Срок годности товара</th>
-                            <th>Единица измерения</th>
-                            <th>Годен до</th>
-                            <th>Кол-во продукта</th>
-                            <th>Единица измерения</th>
-                            <th>Отдел магазина</th>
-                            <th>ФИО главного отдела</th>
-                            <th>Номер ряда</th>
-                            <th>Номер стелажа</th>
-                            <th>Номер полки</th>
+                            {
+                                tableColumnName.map(option =>
+                                    <th key={option.id}>
+                                        {option.ColumnName}
+                                    </th>
+                                )
+                            }
                         </tr>
                     </thead>
                     <tbody>
@@ -68,13 +65,8 @@ const FullProductsTable = (props) => {
                         ))}
 
                     </tbody>
-                </Table >
-            }
+                </Table >}
         </div>
-
-
-
-
     );
 };
 
