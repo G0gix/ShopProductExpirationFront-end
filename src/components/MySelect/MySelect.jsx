@@ -2,12 +2,12 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 import "./MySelect.css";
 
-const MySelect = ({ selectOptions, defaultSelect }) => {
-    console.log(selectOptions)
-
+const MySelect = ({ selectOptions, defaultSelect, onChange }) => {
     return (
-        <Form.Select onChange={e => alert(e.target.value)
-        } className='SortSelect' >
+        <Form.Select onChange={e => onChange(e.target.value)}
+            className='SortSelect'
+        >
+
             <option disabled>{defaultSelect}</option>
             {
                 selectOptions.map(select =>

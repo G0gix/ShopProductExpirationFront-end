@@ -10,6 +10,19 @@ import {
 import "./App.css"
 import SortContainer from './components/SortContainer/SortContainer';
 import FindContainer from './components/FindContainer/FindContainer';
+import { type } from '@testing-library/user-event/dist/type';
+
+
+function getDateTime() {
+  let dateNow = new Date().toLocaleString().replace(",", "").toString();
+  console.log(dateNow);
+
+  return "https://localhost:44396/product/" + dateNow;
+}
+
+let getAllProductsURL = "https://localhost:44396/product";
+let getExpiredGoods = getDateTime();
+
 
 function App() {
   const tableColumnName = [
@@ -28,18 +41,22 @@ function App() {
     { id: 13, ColumnName: "Номер полки" },
   ]
 
-  function getDateTime() {
-    let dateNow = new Date().toLocaleString().replace(",", "").toString();
-    console.log(dateNow);
+  const [selectedSort, setselectedSort] = useState(tableColumnName[0].ColumnName);
+  const [searchDataFromDropDown, setssearchDataFromDropDown] = useState(tableColumnName[0].ColumnName);
+  const [searchQuery, setsearchQuery] = useState('');
 
-    return "https://localhost:44396/product/" + dateNow;
+  const sortPosts = (sort) => {
+    setselectedSort(sort)
+
   }
-  getDateTime();
+  const searchSelect = (seach) => {
+    setssearchDataFromDropDown(seach);
+  }
 
-  let getAllProductsURL = "https://localhost:44396/product";
-  let getExpiredGoods = getDateTime();
-  console.log(getExpiredGoods);
+  const searchQueryFromInput = (data) => {
+    setsearchQuery(data)
 
+  }
 
   return (
     <div>
@@ -49,12 +66,15 @@ function App() {
         </Container>
       </Navbar>
 
+      <h1>{searchDataFromDropDown}</h1>
+      <h1>{selectedSort}</h1>
+      <h1>{searchQuery}</h1>
 
       <div className="inputs">
         <h1 className='container__title'>Поиск в таблице</h1>
         <div className="inputs__container">
-          <SortContainer selectOptions={tableColumnName} />
-          <FindContainer selectOptions={tableColumnName} />
+          <SortContainer onChange={sortPosts} selectOptions={tableColumnName} />
+          <FindContainer onTextChange={searchQueryFromInput} onChange={searchSelect} selectOptions={tableColumnName} />
         </div>
       </div>
 
