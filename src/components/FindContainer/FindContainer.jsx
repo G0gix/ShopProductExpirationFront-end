@@ -9,12 +9,13 @@ import {
 } from 'react-bootstrap';
 
 
-const FindContainer = () => {
+const FindContainer = ({ selectOptions }) => {
+    console.log(selectOptions)
     return (
         <div className='container__find'>
             <div className="find__container">
                 <h3 className="find__container__title">Найти в столбце</h3>
-                <MySelect defaultSelect="Выберете столбец" />
+                <MySelect selectOptions={selectOptions} defaultSelect="Выберете столбец" />
             </div>
         </div>
     );

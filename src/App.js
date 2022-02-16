@@ -12,7 +12,7 @@ import SortContainer from './components/SortContainer/SortContainer';
 import FindContainer from './components/FindContainer/FindContainer';
 
 function App() {
-  const [tableColumnName, settableColumnName] = useState([
+  const tableColumnName = [
     { id: 1, ColumnName: "Название продукта" },
     { id: 2, ColumnName: "Дата изготовления продукта" },
     { id: 3, ColumnName: "Дата упаковки продукта" },
@@ -26,7 +26,7 @@ function App() {
     { id: 11, ColumnName: "Номер ряда" },
     { id: 12, ColumnName: "Номер стелажа" },
     { id: 13, ColumnName: "Номер полки" },
-  ])
+  ]
 
   return (
     <div>
@@ -40,8 +40,8 @@ function App() {
       <div className="inputs">
         <h1 className='container__title'>Поиск в таблице</h1>
         <div className="inputs__container">
-          <SortContainer />
-          <FindContainer />
+          <SortContainer selectOptions={tableColumnName} />
+          <FindContainer selectOptions={tableColumnName} />
         </div>
       </div>
 

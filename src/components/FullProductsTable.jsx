@@ -7,9 +7,6 @@ const FullProductsTable = ({ tableColumnName, APIUrl }) => {
     const [users, setUsers] = useState([]);
     const [isLoaded, SetisLoaded] = useState(true);
 
-    console.log(tableColumnName)
-    console.log(APIUrl)
-
     const fetchData = async () => {
         let response = await fetch(APIUrl, { method: "GET" });
         console.log(response);
