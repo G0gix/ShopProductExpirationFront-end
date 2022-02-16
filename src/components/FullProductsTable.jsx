@@ -18,18 +18,6 @@ const FullProductsTable = ({ tableColumnName, APIUrl }) => {
         fetchData()
     }, [])
 
-    const sortedPosts = useMemo(() => {
-        console.log("Отработала функция сортировки")
-        if (selectedSort) {
-            return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]));
-        }
-        return posts;
-    }, [selectedSort, posts]);
-
-    const sortedAndSeachedPosts = useMemo(() => {
-        return sortedPosts.filter(post => post.title.toLowerCase().includes(searchQuery))
-    }, [searchQuery, sortedPosts]);
-
     return (
         <div>
             {isLoaded
