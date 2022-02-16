@@ -1,6 +1,9 @@
 .Tabs{
     margin-top: 30px;
 }
+.Navbar__Container{
+    margin-left: 50px !important
+}
 
 /* inputs */
 .inputs{

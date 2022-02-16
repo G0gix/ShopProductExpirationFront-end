@@ -6,7 +6,8 @@ const MySelect = ({ selectOptions, defaultSelect }) => {
     console.log(selectOptions)
 
     return (
-        <Form.Select className='SortSelect'>
+        <Form.Select onChange={e => alert(e.target.value)
+        } className='SortSelect' >
             <option disabled>{defaultSelect}</option>
             {
                 selectOptions.map(select =>

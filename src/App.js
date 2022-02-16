@@ -28,11 +28,24 @@ function App() {
     { id: 13, ColumnName: "Номер полки" },
   ]
 
+  function getDateTime() {
+    let dateNow = new Date().toLocaleString().replace(",", "").toString();
+    console.log(dateNow);
+
+    return "https://localhost:44396/product/" + dateNow;
+  }
+  getDateTime();
+
+  let getAllProductsURL = "https://localhost:44396/product";
+  let getExpiredGoods = getDateTime();
+  console.log(getExpiredGoods);
+
+
   return (
     <div>
       <Navbar bg="primary" variant="dark">
-        <Container>
-          <Navbar.Brand href="#home">Shop product expiration</Navbar.Brand>
+        <Container className='Navbar__Container'>
+          <Navbar.Brand>Shop product expiration</Navbar.Brand>
         </Container>
       </Navbar>
 
@@ -52,10 +65,10 @@ function App() {
         style={{ marginTop: "60px" }}
       >
         <Tab eventKey="home" title="Полный список товаров">
-          <FullProductsTable tableColumnName={tableColumnName} APIUrl="https://localhost:44396/product" />
+          <FullProductsTable tableColumnName={tableColumnName} APIUrl={getAllProductsURL} />
         </Tab>
         <Tab eventKey="profile" title="Список просроченного товара">
-          <FullProductsTable tableColumnName={tableColumnName} APIUrl="https://localhost:44396/product" />
+          <FullProductsTable tableColumnName={tableColumnName} APIUrl={getExpiredGoods} />
         </Tab>
       </Tabs>
 
