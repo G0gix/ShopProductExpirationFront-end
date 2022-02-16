@@ -9,7 +9,6 @@ const FullProductsTable = ({ tableColumnName, APIUrl }) => {
 
     const fetchData = async () => {
         let response = await fetch(APIUrl, { method: "GET" });
-        console.log(response);
         let data = await response.json();
         setUsers(data);
         SetisLoaded(false);
@@ -18,6 +17,18 @@ const FullProductsTable = ({ tableColumnName, APIUrl }) => {
     useEffect(() => {
         fetchData()
     }, [])
+
+    const sortedPosts = useMemo(() => {
+        console.log("Отработала функция сортировки")
+        if (selectedSort) {
+            return [...posts].sort((a, b) => a[selectedSort].localeCompare(b[selectedSort]));
+        }
+        return posts;
+    }, [selectedSort, posts]);
+
+    const sortedAndSeachedPosts = useMemo(() => {
+        return sortedPosts.filter(post => post.title.toLowerCase().includes(searchQuery))
+    }, [searchQuery, sortedPosts]);
 
     return (
         <div>
@@ -30,12 +41,13 @@ const FullProductsTable = ({ tableColumnName, APIUrl }) => {
                     hover
                     size="sm"
                     striped
-                    style={{ marginTop: "10px" }}>
+                    style={{ marginTop: "10px" }}
+                >
                     <thead>
                         <tr>
                             {
                                 tableColumnName.map(option =>
-                                    <th key={option.id}>
+                                    <th data-title={option.title} key={option.id}>
                                         {option.ColumnName}
                                     </th>
                                 )
@@ -60,7 +72,6 @@ const FullProductsTable = ({ tableColumnName, APIUrl }) => {
                                 <td>{user.shelfNumber}</td>
                             </tr>
                         ))}
-
                     </tbody>
                 </Table >}
         </div>

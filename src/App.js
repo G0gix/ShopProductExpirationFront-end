@@ -26,19 +26,19 @@ let getExpiredGoods = getDateTime();
 
 function App() {
   const tableColumnName = [
-    { id: 1, ColumnName: "Название продукта" },
-    { id: 2, ColumnName: "Дата изготовления продукта" },
-    { id: 3, ColumnName: "Дата упаковки продукта" },
-    { id: 4, ColumnName: "Срок годности товара" },
-    { id: 5, ColumnName: "Единица измерения" },
-    { id: 6, ColumnName: "Годен до" },
-    { id: 7, ColumnName: "Кол-во продукта" },
-    { id: 8, ColumnName: "Единица измерения" },
-    { id: 9, ColumnName: "Отдел магазина" },
-    { id: 10, ColumnName: "ФИО главного отдела" },
-    { id: 11, ColumnName: "Номер ряда" },
-    { id: 12, ColumnName: "Номер стелажа" },
-    { id: 13, ColumnName: "Номер полки" },
+    { id: 1, title: "productName", ColumnName: "Название продукта" },
+    { id: 2, title: "productManufacturingDate", ColumnName: "Дата изготовления продукта" },
+    { id: 3, title: "productPackagingDate", ColumnName: "Дата упаковки продукта" },
+    { id: 4, title: "shelfLife", ColumnName: "Срок годности товара" },
+    { id: 5, title: "timeUnits", ColumnName: "Единица измерения" },
+    { id: 6, title: "sellBy", ColumnName: "Годен до" },
+    { id: 7, title: "productCount", ColumnName: "Кол-во продукта" },
+    { id: 8, title: "countUnits", ColumnName: "Единица измерения" },
+    { id: 9, title: "shopDepartment", ColumnName: "Отдел магазина" },
+    { id: 10, title: "departmentHeadFio", ColumnName: "ФИО главного отдела" },
+    { id: 11, title: "rowNumber", ColumnName: "Номер ряда" },
+    { id: 12, title: "shelvingNumber", ColumnName: "Номер стелажа" },
+    { id: 13, title: "shelfNumber", ColumnName: "Номер полки" },
   ]
 
   const [selectedSort, setselectedSort] = useState(tableColumnName[0].ColumnName);
@@ -91,9 +91,7 @@ function App() {
           <FullProductsTable tableColumnName={tableColumnName} APIUrl={getExpiredGoods} />
         </Tab>
       </Tabs>
-
     </div>
-
   );
 }
 
