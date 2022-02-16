@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import FullProductsTable from './components/FullProductsTable'
 import {
@@ -10,7 +10,6 @@ import {
 import "./App.css"
 import SortContainer from './components/SortContainer/SortContainer';
 import FindContainer from './components/FindContainer/FindContainer';
-import { type } from '@testing-library/user-event/dist/type';
 
 
 function getDateTime() {
@@ -21,7 +20,7 @@ function getDateTime() {
 }
 
 let getAllProductsURL = "https://localhost:44396/product";
-let getExpiredGoods = getDateTime();
+let getExpiredGoodsURL = getDateTime();
 
 
 function App() {
@@ -41,6 +40,29 @@ function App() {
     { id: 13, title: "shelfNumber", ColumnName: "Номер полки" },
   ]
 
+
+  //#region FetchData
+  const [fullDataToTable, setfullDataToTable] = useState([]);
+  const [ExpiredGoodsToTable, setExpiredGoodsToTable] = useState([]);
+  const [isLoaded, SetisLoaded] = useState(true);
+
+  const fetchData = async () => {
+    let FullDataResponse = await fetch(getAllProductsURL, { method: "GET" });
+    let ExpiredGoodsResponse = await fetch(getExpiredGoodsURL, { method: "GET" });
+    let fullDataToTableJSON = await FullDataResponse.json();
+    let ExpiredGoodsResponseJSON = await ExpiredGoodsResponse.json();
+    setfullDataToTable(fullDataToTableJSON);
+    setExpiredGoodsToTable(ExpiredGoodsResponseJSON)
+    SetisLoaded(false);
+  }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+  //#endregion
+
+
+  //#region dataToSort table or find in table
   const [selectedSort, setselectedSort] = useState(tableColumnName[0].ColumnName);
   const [searchDataFromDropDown, setssearchDataFromDropDown] = useState(tableColumnName[0].ColumnName);
   const [searchQuery, setsearchQuery] = useState('');
@@ -57,6 +79,7 @@ function App() {
     setsearchQuery(data)
 
   }
+  //#endregion
 
   return (
     <div>
@@ -78,17 +101,22 @@ function App() {
         </div>
       </div>
 
-
       <Tabs defaultActiveKey="profile"
         id="uncontrolled-tab-example"
         className="mb-3 Tabs"
         style={{ marginTop: "60px" }}
       >
         <Tab eventKey="home" title="Полный список товаров">
-          <FullProductsTable tableColumnName={tableColumnName} APIUrl={getAllProductsURL} />
+          <FullProductsTable tableColumnName={tableColumnName}
+            tableData={fullDataToTable}
+            isLoaded={isLoaded}
+          />
         </Tab>
         <Tab eventKey="profile" title="Список просроченного товара">
-          <FullProductsTable tableColumnName={tableColumnName} APIUrl={getExpiredGoods} />
+          <FullProductsTable tableColumnName={tableColumnName}
+            tableData={ExpiredGoodsToTable}
+            isLoaded={isLoaded}
+          />
         </Tab>
       </Tabs>
     </div>

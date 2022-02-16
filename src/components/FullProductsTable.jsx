@@ -3,20 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Table from 'react-bootstrap/Table'
 import { useState, useEffect } from 'react';
 
-const FullProductsTable = ({ tableColumnName, APIUrl }) => {
-    const [users, setUsers] = useState([]);
-    const [isLoaded, SetisLoaded] = useState(true);
+const FullProductsTable = ({ tableColumnName, isLoaded, tableData }) => {
 
-    const fetchData = async () => {
-        let response = await fetch(APIUrl, { method: "GET" });
-        let data = await response.json();
-        setUsers(data);
-        SetisLoaded(false);
-    }
-
-    useEffect(() => {
-        fetchData()
-    }, [])
 
     return (
         <div>
@@ -43,7 +31,7 @@ const FullProductsTable = ({ tableColumnName, APIUrl }) => {
                         </tr>
                     </thead>
                     <tbody>
-                        {users.map(user => (
+                        {tableData.map(user => (
                             <tr key={user.id}>
                                 <td>{user.productName}</td>
                                 <td>{user.productManufacturingDate}</td>
