@@ -2,9 +2,11 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 import "./MySelect.css";
 
-const MySelect = ({ selectOptions, defaultSelect, onChange }) => {
+const MySelect = ({ selectOptions, defaultSelect, onChange, value }) => {
     return (
-        <Form.Select onChange={e => onChange(e.target.value)}
+        <Form.Select
+            value={value}
+            onChange={e => onChange(e.target.value)}
             className='SortSelect'
         >
 

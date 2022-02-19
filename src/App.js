@@ -10,7 +10,7 @@ import {
 import "./App.css"
 import SortContainer from './components/SortContainer/SortContainer';
 import FindContainer from './components/FindContainer/FindContainer';
-
+import { usePosts } from './components/hooks/useTable'
 
 function getDateTime() {
   let dateNow = new Date().toLocaleString().replace(",", "").toString();
@@ -40,11 +40,17 @@ function App() {
     { id: 13, title: "shelfNumber", ColumnName: "Номер полки" },
   ]
 
-
-  //#region FetchData
+  //#region States
   const [fullDataToTable, setfullDataToTable] = useState([]);
+  const [filter, setFilter] = useState({ sort: '', query: '' })
   const [ExpiredGoodsToTable, setExpiredGoodsToTable] = useState([]);
   const [isLoaded, SetisLoaded] = useState(true);
+
+  //#endregion
+
+
+  //#region FetchData
+
 
   const fetchData = async () => {
     let FullDataResponse = await fetch(getAllProductsURL, { method: "GET" });
@@ -60,26 +66,10 @@ function App() {
     fetchData()
   }, [])
   //#endregion
-
-
   //#region dataToSort table or find in table
-  const [selectedSort, setselectedSort] = useState(tableColumnName[0].ColumnName);
-  const [searchDataFromDropDown, setssearchDataFromDropDown] = useState(tableColumnName[0].ColumnName);
-  const [searchQuery, setsearchQuery] = useState('');
 
-  const sortPosts = (sort) => {
-    setselectedSort(sort)
 
-  }
-  const searchSelect = (seach) => {
-    setssearchDataFromDropDown(seach);
-  }
-
-  const searchQueryFromInput = (data) => {
-    setsearchQuery(data)
-
-  }
-  //#endregion
+  const sortedAndSeachedTable = usePosts(fullDataToTable, filter.sort, filter.query)
 
   return (
     <div>
@@ -89,15 +79,14 @@ function App() {
         </Container>
       </Navbar>
 
-      <h1>{searchDataFromDropDown}</h1>
-      <h1>{selectedSort}</h1>
-      <h1>{searchQuery}</h1>
+      <h1>{filter.sort}</h1>
+      <h1>{filter.query}</h1>
 
       <div className="inputs">
         <h1 className='container__title'>Поиск в таблице</h1>
         <div className="inputs__container">
-          <SortContainer onChange={sortPosts} selectOptions={tableColumnName} />
-          <FindContainer onTextChange={searchQueryFromInput} onChange={searchSelect} selectOptions={tableColumnName} />
+          {/* <SortContainer onChange={sortPosts} selectOptions={tableColumnName} /> */}
+          <FindContainer filter={filter} setFilter={setFilter} selectOptions={tableColumnName} />
         </div>
       </div>
 
@@ -108,15 +97,15 @@ function App() {
       >
         <Tab eventKey="home" title="Полный список товаров">
           <FullProductsTable tableColumnName={tableColumnName}
-            tableData={fullDataToTable}
+            tableData={sortedAndSeachedTable}
             isLoaded={isLoaded}
           />
         </Tab>
         <Tab eventKey="profile" title="Список просроченного товара">
-          <FullProductsTable tableColumnName={tableColumnName}
+          {/* <FullProductsTable tableColumnName={tableColumnName}
             tableData={ExpiredGoodsToTable}
             isLoaded={isLoaded}
-          />
+          /> */}
         </Tab>
       </Tabs>
     </div>
