@@ -18,6 +18,7 @@
 	text-align: center;
 	font-size: 40px;
 	font-family: 'Roboto', sans-serif;
+	font-weight: 100;
 }
 .form__inputLogin{
 	width: 270px;
@@ -37,6 +38,7 @@
 	display: block;
 	font-size: 40px;
 	font-family: 'Roboto', sans-serif;
+	font-weight: 100;
 }
 .form__inputPassword{
 	display: block;
@@ -58,8 +60,13 @@
 	padding: 10px 30px 10px 30px;
 	border-radius: 10px;
 	margin: 20px auto;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 400;
+	
+
 }
 .form__submit:hover{
+
 	background-color: #0b459b;
 	transition: .6s;
 }
