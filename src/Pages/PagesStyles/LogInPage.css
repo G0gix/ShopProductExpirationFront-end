@@ -1,7 +1,65 @@
 .Login{
-	width: 1080px;
-	margin:  0 auto;
+	width: 500px;
+	height: 100vh;
+	margin: 0 auto;
+	display:  flex;
+	justify-content: center;
+	align-items: center;
 }
 .LogIn__container{
+
+}
+.container__form{
+	width: 500px;
 	
+}
+.form__labelLogin{
+	display: block;
+	text-align: center;
+	font-size: 40px;
+	font-family: 'Roboto', sans-serif;
+}
+.form__inputLogin{
+	width: 270px;
+	padding: 4px;
+	margin: 20px auto;
+	text-align: center;
+	display: block;
+	border: 3px solid #3f84eb;
+	
+}
+.form__inputLogin:focus{
+	border-color: #0050c7 !important; 
+	outline: none;
+}
+.form__labelPassword{
+	text-align: center;
+	display: block;
+	font-size: 40px;
+	font-family: 'Roboto', sans-serif;
+}
+.form__inputPassword{
+	display: block;
+	width: 270px;
+	padding: 4px;
+	margin: 20px auto;
+	border: 3px solid #3f84eb;
+	text-align: center;
+}
+.form__inputPassword:focus{
+	border-color: #0050c7 !important; 
+	outline: none;
+}
+.form__submit{
+	display: block;
+	background-color: #0d6efd;
+	color: white;
+	border: none;
+	padding: 10px 30px 10px 30px;
+	border-radius: 10px;
+	margin: 20px auto;
+}
+.form__submit:hover{
+	background-color: #0b459b;
+	transition: .6s;
 }

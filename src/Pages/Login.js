@@ -6,23 +6,13 @@ const Login = () => {
 	return (
 		<div className='Login'>
 			<div className="LogIn__container">
-				<Form>
-					<Form.Group className="mb-3" controlId="formBasicEmail">
-						<Form.Label>Email address</Form.Label>
-						<Form.Control type="email" placeholder="Enter email" />
-					</Form.Group>
-
-					<Form.Group className="mb-3" controlId="formBasicPassword">
-						<Form.Label>Password</Form.Label>
-						<Form.Control type="password" placeholder="Password" />
-					</Form.Group>
-					<Form.Group className="mb-3" controlId="formBasicCheckbox">
-						<Form.Check type="checkbox" label="Check me out" />
-					</Form.Group>
-					<Button variant="primary" type="submit">
-						Submit
-					</Button>
-				</Form>
+				<form className='container__form' action="post">
+					<label className='form__labelLogin' htmlFor="">Введите Логин</label>
+					<input className='form__inputLogin' type="text" placeholder='Логин' />
+					<label className='form__labelPassword' htmlFor="">Введите Пароль</label>
+					<input className='form__inputPassword' type="password" placeholder='Пароль' />
+					<input className='form__submit' type="submit" />
+				</form>
 			</div>
 		</div>
 	);
