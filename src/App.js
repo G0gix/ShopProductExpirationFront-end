@@ -77,8 +77,11 @@ function App() {
       <Navbar bg="primary" variant="dark">
         <Container className='Navbar__Container'>
           <Navbar.Brand>Shop product expiration</Navbar.Brand>
+
         </Container>
       </Navbar>
+
+
 
       <div className="inputs">
         <h1 className='container__title'>Поиск в таблице</h1>
