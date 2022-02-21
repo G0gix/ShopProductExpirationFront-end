@@ -17,7 +17,7 @@ import Login from './Pages/Login';
 function App() {
   return (
     <>
-      <Navbar bg="primary" variant="dark">
+      <Navbar fixed="top" bg="primary" variant="dark">
         <Container className='Navbar__Container'>
           <Navbar.Brand>Shop product expiration</Navbar.Brand>
           <Nav className="me-auto">
