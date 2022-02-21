@@ -16,10 +16,10 @@ const FindContainer = ({ selectOptions, filter, setFilter }) => {
             <div className="find__container">
                 <h3 className="find__container__title">Найти в столбце</h3>
                 <Form>
-                    <MySelect onChange={selectodSort => setFilter({ ...filter, sort: selectodSort })}
+                    {/* <MySelect onChange={selectodSort => setFilter({ ...filter, sort: selectodSort })}
                         value={filter.sort}
                         selectOptions={selectOptions}
-                        defaultSelect="Выберете столбец" />
+                        defaultSelect="Выберете столбец" /> */}
                     <Form.Group className="mb-3" controlId="formBasicEmail">
                         <h3 className='find__container__title2'>Введите данные для поиска</h3>
                         <Form.Control onChange={e => setFilter({ ...filter, query: e.target.value })}

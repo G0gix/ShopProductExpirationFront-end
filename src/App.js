@@ -42,8 +42,8 @@ function App() {
 
   //#region States
   const [fullDataToTable, setfullDataToTable] = useState([]);
-  const [filter, setFilter] = useState({ sort: '', query: '' })
   const [ExpiredGoodsToTable, setExpiredGoodsToTable] = useState([]);
+  const [filter, setFilter] = useState({ sort: '', query: '' })
   const [isLoaded, SetisLoaded] = useState(true);
 
   //#endregion
@@ -70,6 +70,7 @@ function App() {
 
 
   const sortedAndSeachedTable = usePosts(fullDataToTable, filter.sort, filter.query)
+  const sortedExpiredGoodsToTable = usePosts(ExpiredGoodsToTable, filter.sort, filter.query)
 
   return (
     <div>
@@ -78,9 +79,6 @@ function App() {
           <Navbar.Brand>Shop product expiration</Navbar.Brand>
         </Container>
       </Navbar>
-
-      <h1>{filter.sort}</h1>
-      <h1>{filter.query}</h1>
 
       <div className="inputs">
         <h1 className='container__title'>Поиск в таблице</h1>
@@ -102,10 +100,10 @@ function App() {
           />
         </Tab>
         <Tab eventKey="profile" title="Список просроченного товара">
-          {/* <FullProductsTable tableColumnName={tableColumnName}
-            tableData={ExpiredGoodsToTable}
+          <FullProductsTable tableColumnName={tableColumnName}
+            tableData={sortedExpiredGoodsToTable}
             isLoaded={isLoaded}
-          /> */}
+          />
         </Tab>
       </Tabs>
     </div>
