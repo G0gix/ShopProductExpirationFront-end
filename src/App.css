@@ -21,4 +21,15 @@
     padding: 0px;
     margin: 0px;
 }
+
+.Link{
+    color: white;
+    margin-left: 10px;
+    text-decoration: none;
+    font-size: 20px;
+}
+.Link:hover{
+    color: rgb(236, 231, 231);
+    transition: 0.5s;
+}
 /* /inputs */

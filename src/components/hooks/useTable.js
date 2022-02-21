@@ -2,7 +2,6 @@ import { useMemo } from "react"
 
 
 export const useSortedPosts = (posts, sort) => {
-    debugger;
     const sortedPosts = useMemo(() => {
         console.log("Отработала функция сортировки")
         if (sort) {
@@ -19,7 +18,6 @@ export const usePosts = (posts, sort, query) => {
     const sortedPosts = useSortedPosts(posts, sort);
 
     const sortedAndSeachedPosts = useMemo(() => {
-        debugger;
         console.log(posts.productName)
         return sortedPosts.filter(post => post.productName.toLowerCase().includes(query))
     }, [query, sortedPosts]);
