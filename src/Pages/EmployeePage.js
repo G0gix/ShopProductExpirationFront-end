@@ -1,15 +1,16 @@
 import React from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation, Navigate } from 'react-router';
+import { useAuth } from '../components/hooks/useAuth';
 
 const EmployeePage = () => {
+	const location = useLocation();
 	const navigate = useNavigate();
-
-	const goBack = () => navigate(-2);
+	const { signout } = useAuth();
 
 
 	return (
 		<div>
-			<button style={{ marginTop: 150 }} onClick={goBack}>222</button>
+			<button style={{ marginTop: 150 }} onClick={() => signout(() => navigate("/", { replace: true }))}>222</button>
 		</div>
 	);
 };

@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import './PagesStyles/LogInPage.css'
+import { useAuth } from '../components/hooks/useAuth';
 
 const Login = () => {
+	//#region useStates
 	const [login, setlogin] = useState("");
 	const [password, setpassword] = useState("");
 	const [incorrectData, setincorrectData] = useState("")
 	const [usersData, setUserData] = useState([]);
 	const [passwordShown, setPasswordShown] = useState(false);
+	//#endregion
 	const navigate = useNavigate();
-
-	const goToEmployeePage = () => navigate("/employeePage")
+	const location = useLocation();
+	const { signin } = useAuth()
 
 	async function CheckDataFromDB(e) {
 		e.preventDefault();
@@ -23,8 +26,7 @@ const Login = () => {
 
 			if (getAccess.ok) {
 				let accessData = await getAccess.json();
-				console.log(accessData.Succeeded);
-				goToEmployeePage();
+				signin(accessData, () => navigate("/employeePage", { replace: true }))
 			} else {
 				setincorrectData("Неверный логин или пароль")
 			}
@@ -36,19 +38,20 @@ const Login = () => {
 	};
 
 	return (
+
 		<div className='Login'>
 			<div className="LogIn__container">
 				<form className='container__form'
 					action="post"
 					onSubmit={CheckDataFromDB}
 				>
-					<label className='form__labelLogin' htmlFor="">Введите Логин</label>
+					<label className='form__labelLogin' htmlFor="">Введите логин</label>
 					<input className='form__inputLogin'
 						type="text"
 						placeholder='Логин'
 						onChange={value => setlogin(value.target.value)}
 					/>
-					<label className='form__labelPassword' htmlFor="">Введите Пароль</label>
+					<label className='form__labelPassword' htmlFor="">Введите пароль</label>
 					<div className='form__password'>
 						<input className='password__inputPassword'
 							type={passwordShown ? "text" : "password"}
