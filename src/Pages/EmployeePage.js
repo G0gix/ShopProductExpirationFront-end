@@ -7,6 +7,7 @@ import {
 	Button,
 	Tab,
 	Tabs,
+	Modal,
 } from 'react-bootstrap';
 import "../App.css"
 import SortContainer from '../components/SortContainer/SortContainer';
@@ -84,6 +85,11 @@ const EmployeePage = () => {
 		setExpiredGoodsToTable(ExpiredGoodsToTable.filter(p => p.id !== product));
 	}
 
+	const [show, setShow] = useState(false);
+
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
+
 	return (
 		<div>
 			<Button variant="success" style={{ marginTop: 150 }} onClick={() => signout(() => navigate("/", { replace: true }))}>Выйти</Button>
@@ -98,6 +104,7 @@ const EmployeePage = () => {
 						tableData={sortedAndSeachedTable}
 						isLoaded={isLoaded}
 						remove={removeFullTableItem}
+						onClick={handleShow}
 					/>
 				</Tab>
 				<Tab eventKey="profile" title="Список просроченного товара">
@@ -105,10 +112,21 @@ const EmployeePage = () => {
 						tableData={sortedExpiredGoodsToTable}
 						isLoaded={isLoaded}
 						remove={removeFullTableItem}
+						onClick={handleShow}
 					/>
 				</Tab>
 			</Tabs>
-		</div>
+
+
+			<Modal show={show} onHide={handleClose}>
+				<Modal.Header closeButton>
+					<Modal.Title>Изменить </Modal.Title>
+				</Modal.Header>
+				<Modal.Body></Modal.Body>
+			</Modal>
+
+
+		</div >
 	);
 };
 
