@@ -40,7 +40,7 @@
 	font-family: 'Roboto', sans-serif;
 	font-weight: 100;
 }
-.form__inputPassword{
+.password__inputPassword{
 	display: block;
 	width: 270px;
 	padding: 4px;
@@ -48,7 +48,11 @@
 	border: 3px solid #3f84eb;
 	text-align: center;
 }
-.form__inputPassword:focus{
+.form__password{
+	margin: 0 auto;
+	width: 270px;
+}
+.password__inputPassword:focus{
 	border-color: #0050c7 !important; 
 	outline: none;
 }
