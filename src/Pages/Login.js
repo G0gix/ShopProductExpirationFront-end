@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router';
 import './PagesStyles/LogInPage.css'
 
 const Login = () => {
@@ -7,6 +8,9 @@ const Login = () => {
 	const [incorrectData, setincorrectData] = useState("")
 	const [usersData, setUserData] = useState([]);
 	const [passwordShown, setPasswordShown] = useState(false);
+	const navigate = useNavigate();
+
+	const goToEmployeePage = () => navigate("/employeePage")
 
 	async function CheckDataFromDB(e) {
 		e.preventDefault();
@@ -20,15 +24,14 @@ const Login = () => {
 			if (getAccess.ok) {
 				let accessData = await getAccess.json();
 				console.log(accessData.Succeeded);
+				goToEmployeePage();
 			} else {
-				setincorrectData("Не верный логин или пароль")
+				setincorrectData("Неверный логин или пароль")
 			}
 		}
 	}
 
 	const togglePassword = () => {
-		// When the handler is invoked
-		// inverse the boolean state of passwordShown
 		setPasswordShown(!passwordShown);
 	};
 
