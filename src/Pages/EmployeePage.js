@@ -13,6 +13,7 @@ import "../App.css"
 import SortContainer from '../components/SortContainer/SortContainer';
 import FindContainer from '../components/FindContainer/FindContainer';
 import { usePosts } from '../components/hooks/useTable'
+import ChangeProductTable  from '../components/ChangeProductTable';
 
 
 //#region UrlToFetch
@@ -115,6 +116,9 @@ const EmployeePage = () => {
 						onClick={handleShow}
 					/>
 				</Tab>
+				<Tab eventKey="newProduct"  title="Добавить новый товар ">
+					<ChangeProductTable />
+				</Tab>
 			</Tabs>
 
 
@@ -124,8 +128,6 @@ const EmployeePage = () => {
 				</Modal.Header>
 				<Modal.Body></Modal.Body>
 			</Modal>
-
-
 		</div >
 	);
 };
