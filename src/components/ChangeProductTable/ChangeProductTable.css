@@ -1,0 +1,11 @@
+.input{
+    width: 100%;
+    border: 2px solid rgb(13,110,253);
+    border-radius: 0;
+
+}
+.input:focus{
+    border: 2px solid #5780cb;
+    outline: none;
+    transition: 0.5s;
+}

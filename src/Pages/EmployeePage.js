@@ -13,7 +13,7 @@ import "../App.css"
 import SortContainer from '../components/SortContainer/SortContainer';
 import FindContainer from '../components/FindContainer/FindContainer';
 import { usePosts } from '../components/hooks/useTable'
-import ChangeProductTable  from '../components/ChangeProductTable';
+import ChangeProductTable  from '../components/ChangeProductTable/ChangeProductTable';
 
 
 //#region UrlToFetch
@@ -60,8 +60,6 @@ const EmployeePage = () => {
 	//#endregion
 
 	//#region FetchData
-
-
 	const fetchData = async () => {
 		let FullDataResponse = await fetch(getAllProductsURL, { method: "GET" });
 		let ExpiredGoodsResponse = await fetch(getExpiredGoodsURL, { method: "GET" });
@@ -81,10 +79,45 @@ const EmployeePage = () => {
 	const sortedAndSeachedTable = usePosts(fullDataToTable, filter.sort, filter.query)
 	const sortedExpiredGoodsToTable = usePosts(ExpiredGoodsToTable, filter.sort, filter.query)
 
+	//#region DeleteProductInDB
 	const removeFullTableItem = (product) => {
-		setfullDataToTable(fullDataToTable.filter(p => p.id !== product));
-		setExpiredGoodsToTable(ExpiredGoodsToTable.filter(p => p.id !== product));
+
+		try {
+			let deleteProductInDB =  fetch(`https://localhost:44396/product/${product}`,{method:"DELETE"})
+			setfullDataToTable(fullDataToTable.filter(p => p.id !== product));
+			setExpiredGoodsToTable(ExpiredGoodsToTable.filter(p => p.id !== product));
+			alert("Успешно удалено!")
+		}catch (e) {
+			alert("Ошибка!")
+		}
+
+
+
 	}
+	//#endregion
+
+	//#region
+	const dbSignOut = async () => {
+		debugger;
+		let dbSignOutFetch = await fetch(`https://localhost:44396/account/1`,{method:"GET"})
+		if (dbSignOutFetch.ok) {
+			signout(() => navigate("/", { replace: true }));
+		}else {
+			alert("Ошибка")
+		}
+
+	}
+
+	const dbSignIn = async () => {
+		debugger;
+		let dbSignOutFetch = await fetch(`https://localhost:44396/account/?userName=admin&password=QqwW123@`,{method:"GET"})
+		if (dbSignOutFetch.ok) {
+		}else {
+			alert("Ошибка")
+		}
+
+	}
+	//# endregion
 
 	const [show, setShow] = useState(false);
 
@@ -93,7 +126,15 @@ const EmployeePage = () => {
 
 	return (
 		<div>
-			<Button variant="success" style={{ marginTop: 150 }} onClick={() => signout(() => navigate("/", { replace: true }))}>Выйти</Button>
+			<Button variant="success"
+					style={{ marginTop: 150 }}
+					onClick={dbSignOut}
+			>Выйти</Button>
+
+			<Button variant="success"
+					style={{ marginTop: 150 }}
+					onClick={dbSignIn}
+			>Войти</Button>
 
 			<Tabs defaultActiveKey="profile"
 				id="uncontrolled-tab-example"
