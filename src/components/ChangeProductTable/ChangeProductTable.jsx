@@ -63,62 +63,73 @@ const ChangeProductTable = () => {
 					<td><input placeholder="Введите данные"
 							   className="input"
 							   type="datetime-local"
-							   onChange={e => alert(e.target.value)}
+							   onChange={e => setTableData({...tableData,productManufacturingDate: e.target.value})}
+					/>
+					</td>
+					<td><input placeholder="Введите данные"
+							   className="input"
+							   type="datetime-local"
+							   onChange={e => setTableData({...tableData,productPackagingDate: e.target.value})}
+					/>
+					</td>
+					<td><input placeholder="Введите данные"
+							   className="input"
+							   type="number"
+							   onChange={e => setTableData({...tableData,shelfLife: e.target.value})}
 					/>
 					</td>
 					<td><input placeholder="Введите данные"
 							   className="input"
 							   type="text"
+							   onChange={e => setTableData({...tableData,timeUnits: e.target.value})}
+					/>
+					</td>
+					<td><input placeholder="Введите данные"
+							   className="input"
+							   type="datetime-local"
+							   onChange={e => setTableData({...tableData,sellBy: e.target.value})}
+					/>
+					</td>
+					<td><input placeholder="Введите данные"
+							   className="input"
+							   type="number"
+							   onChange={e => setTableData({...tableData,productCount: e.target.value})}
 					/>
 					</td>
 					<td><input placeholder="Введите данные"
 							   className="input"
 							   type="text"
+							   onChange={e => setTableData({...tableData,countUnits: e.target.value})}
+					/>
+					</td>
+					<td><input placeholder="Введите данныеtttt"
+							   className="input"
+							   type="text"
+							   onChange={e => setTableData({...tableData,shopDepartment: e.target.value})}
 					/>
 					</td>
 					<td><input placeholder="Введите данные"
 							   className="input"
 							   type="text"
+							   onChange={e => setTableData({...tableData,departmentHeadFio: e.target.value})}
 					/>
 					</td>
 					<td><input placeholder="Введите данные"
 							   className="input"
-							   type="text"
+							   type="number"
+							   onChange={e => setTableData({...tableData,rowNumber: e.target.value})}
 					/>
 					</td>
 					<td><input placeholder="Введите данные"
 							   className="input"
-							   type="text"
+							   type="number"
+							   onChange={e => setTableData({...tableData,shelvingNumber: e.target.value})}
 					/>
 					</td>
 					<td><input placeholder="Введите данные"
 							   className="input"
-							   type="text"
-					/>
-					</td>
-					<td><input placeholder="Введите данные"
-							   className="input"
-							   type="text"
-					/>
-					</td>
-					<td><input placeholder="Введите данные"
-							   className="input"
-							   type="text"
-					/>
-					</td>
-					<td><input placeholder="Введите данные"
-							   className="input"
-							   type="text"
-					/>
-					</td>
-					<td><input placeholder="Введите данные"
-							   className="input"
-							   type="text"
-					/>
-					</td>
-					<td><input placeholder="Введите данные"
-							   className="input"
-							   type="text"
+							   type="number"
+							   onChange={e => setTableData({...tableData,shelfNumber: e.target.value})}
 					/>
 					</td>
 				</tr>
