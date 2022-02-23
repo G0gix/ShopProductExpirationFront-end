@@ -20,9 +20,39 @@ const ChangeProductTable = () => {
 			shelfNumber: '',
 		})
 
-	const showData = (e) => {
+	const showData = async  (e) => {
+		try {
+			let createNewProductFetch = await fetch(`https://localhost:44396/product/?productName=${tableData.productName}
+			&productManufacturingDate=${tableData.productManufacturingDate}
+			&productPackagingDate=${tableData.productPackagingDate}
+			&shelfLife=${tableData.shelfLife}
+			&timeUnits=${tableData.timeUnits}
+			&sellBy=${tableData.sellBy}
+			&productCount=${tableData.productCount}
+			&countUnits=${tableData.countUnits}
+			&shopDepartment=${tableData.shopDepartment}
+			&departmentHeadFio=${tableData.departmentHeadFio}
+			&rowNumber=${tableData.rowNumber}
+			&shelvingNumber=${tableData.shelvingNumber}
+			&shelfNumber=${tableData.shelfNumber}`,{method:"POST"})
+
+		}catch (e) {
+			alert("error")
+		}
+
 		console.log(tableData.productName)
 		console.log(tableData.productManufacturingDate)
+		console.log(tableData.productPackagingDate)
+		console.log(tableData.shelfLife)
+		console.log(tableData.timeUnits)
+		console.log(tableData.sellBy)
+		console.log(tableData.productCount)
+		console.log(tableData.countUnits)
+		console.log(tableData.shopDepartment)
+		console.log(tableData.departmentHeadFio)
+		console.log(tableData.rowNumber)
+		console.log(tableData.shelvingNumber)
+		console.log(tableData.shelfNumber)
 	}
 
 	return (
