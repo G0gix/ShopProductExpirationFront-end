@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { Table, Button, Modal, } from 'react-bootstrap';
 import "./ChangeProductTable.css";
 
+
 const ChangeProductTable = () => {
 	const [tableData,setTableData ] =  useState(
 		{

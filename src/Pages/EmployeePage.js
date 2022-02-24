@@ -9,11 +9,9 @@ import {
 	Tabs,
 	Modal,
 } from 'react-bootstrap';
-import "../App.css"
-import SortContainer from '../components/SortContainer/SortContainer';
-import FindContainer from '../components/FindContainer/FindContainer';
 import { usePosts } from '../components/hooks/useTable'
 import ChangeProductTable  from '../components/ChangeProductTable/ChangeProductTable';
+import "./PagesStyles/EmployeePage.css"
 
 
 //#region UrlToFetch
@@ -57,6 +55,8 @@ const EmployeePage = () => {
 	const [filter, setFilter] = useState({ sort: '', query: '' })
 	const [isLoaded, SetisLoaded] = useState(true);
 
+	const [show, setShow] = useState(false);
+
 	//#endregion
 
 	//#region FetchData
@@ -76,12 +76,17 @@ const EmployeePage = () => {
 	//#endregion
 	//#region dataToSort table or find in table
 
+	//#region updateDataInTable
+	const updateDataInTable = (e) => {
+		fetchData();
+	}
+	//#endregion
+
 	const sortedAndSeachedTable = usePosts(fullDataToTable, filter.sort, filter.query)
 	const sortedExpiredGoodsToTable = usePosts(ExpiredGoodsToTable, filter.sort, filter.query)
 
 	//#region DeleteProductInDB
 	const removeFullTableItem = (product) => {
-
 		try {
 			let deleteProductInDB =  fetch(`https://localhost:44396/product/${product}`,{method:"DELETE"})
 			setfullDataToTable(fullDataToTable.filter(p => p.id !== product));
@@ -90,13 +95,10 @@ const EmployeePage = () => {
 		}catch (e) {
 			alert("Ошибка!")
 		}
-
-
-
 	}
 	//#endregion
 
-	//#region
+	//#region dbSignOut
 	const dbSignOut = async () => {
 		debugger;
 		let dbSignOutFetch = await fetch(`https://localhost:44396/account/1`,{method:"GET"})
@@ -107,34 +109,22 @@ const EmployeePage = () => {
 		}
 
 	}
-
-	const dbSignIn = async () => {
-		debugger;
-		let dbSignOutFetch = await fetch(`https://localhost:44396/account/?userName=admin&password=QqwW123@`,{method:"GET"})
-		if (dbSignOutFetch.ok) {
-		}else {
-			alert("Ошибка")
-		}
-
-	}
 	//# endregion
 
-	const [show, setShow] = useState(false);
-
+	//#region showModal
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
+	//#endregion
 
 	return (
-		<div>
+		<div style={{marginTop:150}}>
 			<Button variant="success"
-					style={{ marginTop: 150 }}
 					onClick={dbSignOut}
 			>Выйти</Button>
 
-			<Button variant="success"
-					style={{ marginTop: 150 }}
-					onClick={dbSignIn}
-			>Войти</Button>
+			<div className="updateTableButton">
+				<Button onClick={updateDataInTable} variant="outline-primary">Обновить таблицу</Button>
+			</div>
 
 			<Tabs defaultActiveKey="profile"
 				id="uncontrolled-tab-example"
