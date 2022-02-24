@@ -1,3 +1,12 @@
+.attention{
+    color: red;
+    font-size: 20px;
+    margin-top: 50px;
+}
+.attention__green{
+    color: green;
+}
+
 .input{
     width: 100%;
     border: 2px solid rgb(13,110,253);
@@ -8,4 +17,12 @@
     border: 2px solid #5780cb;
     outline: none;
     transition: 0.5s;
+}
+.required{
+    border: 2px solid green !important;
+}
+.Modalattention{
+    font-size: 20px;
+    color: red;
+
 }

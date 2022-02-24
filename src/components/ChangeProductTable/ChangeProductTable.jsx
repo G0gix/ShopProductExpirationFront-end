@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Table, Button, FormGroup, } from 'react-bootstrap';
+import { Table, Button, Modal, } from 'react-bootstrap';
 import "./ChangeProductTable.css";
 
 const ChangeProductTable = () => {
@@ -20,9 +20,28 @@ const ChangeProductTable = () => {
 			shelfNumber: '',
 		})
 
+	const [validationError, servalidationError] = useState("");
+	const [show, setShow] = useState(false);
+
+	//#region ShowAnd Close Modal
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
+	//#endregion
+
 	const showData = async (e) => {
-		try {
-			let createNewProductFetch = await fetch(`https://localhost:44396/product/?productName=${tableData.productName}
+		if (tableData.productName == "" 			 || tableData.productName == " " 			  ||
+			tableData.productManufacturingDate == "" || tableData.productManufacturingDate == " " ||
+			tableData.shelfLife == "" 				 || tableData.shelfLife == " " 				  ||
+			tableData.timeUnits == "" 				 || tableData.timeUnits == " " 				  ||
+			tableData.sellBy == "" 					 || tableData.sellBy == " " 				  ||
+			tableData.shopDepartment == "" 			 || tableData.shopDepartment == " "
+		){
+			servalidationError("Некоторые поля не заполнены");
+			handleShow();
+		}else {
+			servalidationError("");
+			try {
+				let createNewProductFetch = await fetch(`https://localhost:44396/product/?productName=${tableData.productName}
 			&productManufacturingDate=${tableData.productManufacturingDate}
 			&productPackagingDate=${tableData.productPackagingDate}
 			&shelfLife=${tableData.shelfLife}
@@ -34,16 +53,17 @@ const ChangeProductTable = () => {
 			&departmentHeadFio=${tableData.departmentHeadFio}
 			&rowNumber=${tableData.rowNumber}
 			&shelvingNumber=${tableData.shelvingNumber}
-			&shelfNumber=${tableData.shelfNumber}`,{method:"POST"});
-			alert("Продукт добавлен");
-		}catch (e) {
-			alert("error")
+			&shelfNumber=${tableData.shelfNumber}`, {method: "POST"});
+				alert("Продукт добавлен");
+			} catch (e) {
+				alert("error")
+			}
 		}
 	}
 
 	return (
 		<div>
-
+			<h1 className="attention">Поля отмеченные <span className="attention__green">зеленым</span>  обязательны для заполнения</h1>
 		<Table bordered
 			   responsive
 			   hover
@@ -71,13 +91,13 @@ const ChangeProductTable = () => {
 			<tbody>
 				<tr>
 					<td><input placeholder="Введите данные"
-							   className="input"
+							   className="input required "
 							   type="text"
 							   onChange={e =>  setTableData({...tableData, productName: e.target.value})}
 					/>
 					</td>
 					<td><input placeholder="Введите данные"
-							   className="input"
+							   className="input required "
 							   type="datetime-local"
 							   onChange={e => setTableData({...tableData,productManufacturingDate: e.target.value})}
 					/>
@@ -89,19 +109,19 @@ const ChangeProductTable = () => {
 					/>
 					</td>
 					<td><input placeholder="Введите данные"
-							   className="input"
+							   className="input required "
 							   type="number"
 							   onChange={e => setTableData({...tableData,shelfLife: e.target.value})}
 					/>
 					</td>
 					<td><input placeholder="Введите данные"
-							   className="input"
+							   className="input required"
 							   type="text"
 							   onChange={e => setTableData({...tableData,timeUnits: e.target.value})}
 					/>
 					</td>
 					<td><input placeholder="Введите данные"
-							   className="input"
+							   className="input required "
 							   type="datetime-local"
 							   onChange={e => setTableData({...tableData,sellBy: e.target.value})}
 					/>
@@ -119,7 +139,7 @@ const ChangeProductTable = () => {
 					/>
 					</td>
 					<td><input placeholder="Введите данныеtttt"
-							   className="input"
+							   className="input required"
 							   type="text"
 							   onChange={e => setTableData({...tableData,shopDepartment: e.target.value})}
 					/>
@@ -151,8 +171,27 @@ const ChangeProductTable = () => {
 				</tr>
 			</tbody>
 		</Table >
-				<Button onClick={showData} >Добавить</Button>
 
+			<Button onClick={showData} >Добавить</Button>
+
+
+
+			<Modal show={show} onHide={handleClose}>
+				<Modal.Header closeButton>
+					<Modal.Title>
+						Ошибка! <h1 style={{fontSize:20}} >{validationError}</h1>
+					</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+
+					<h1 className="Modalattention">Поля отмеченные <span className="attention__green">зеленым</span>  обязательны для заполнения</h1>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button variant="secondary" onClick={handleClose}>
+						Закрыть
+					</Button>
+				</Modal.Footer>
+			</Modal>
 		</div>
 	);
 };
