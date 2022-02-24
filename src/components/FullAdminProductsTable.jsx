@@ -4,7 +4,7 @@ import Table from 'react-bootstrap/Table'
 import { Button } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 
-const FullAdminProductsTable = ({ tableColumnName, isLoaded, tableData, remove, onClick }) => {
+const FullAdminProductsTable = ({ tableColumnName, isLoaded, tableData, remove, onClick, changeProduct }) => {
 
 
 	return (
@@ -53,7 +53,10 @@ const FullAdminProductsTable = ({ tableColumnName, isLoaded, tableData, remove, 
 										onClick={() => remove(user.id)}
 									>Удалить</Button>
 									<Button variant="warning"
-										onClick={onClick}
+										onClick={() => {
+											onClick()
+											changeProduct(user.id)}
+										}
 									>Изменить</Button>
 								</td>
 							</tr>

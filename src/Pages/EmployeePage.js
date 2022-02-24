@@ -90,6 +90,7 @@ const EmployeePage = () => {
 	const sortedAndSeachedTable = usePosts(fullDataToTable, filter.sort, filter.query)
 	const sortedExpiredGoodsToTable = usePosts(ExpiredGoodsToTable, filter.sort, filter.query)
 
+	//#region FuncFromAdminTable
 	//#region DeleteProductInDB
 	const removeFullTableItem = (product) => {
 		try {
@@ -101,6 +102,13 @@ const EmployeePage = () => {
 			alert("Ошибка!")
 		}
 	}
+	//#endregion
+
+	//#region changeProductData
+	const changeProductData = (product) => {
+		alert(product);
+	}
+	//#endregion
 	//#endregion
 
 	//#region dbSignOut
@@ -150,6 +158,7 @@ const EmployeePage = () => {
 							isLoaded={isLoaded}
 							remove={removeFullTableItem}
 							onClick={handleShow}
+							changeProduct={changeProductData}
 						/>
 					</Tab>
 					<Tab eventKey="profile" title="Список просроченного товара">
@@ -158,6 +167,8 @@ const EmployeePage = () => {
 							isLoaded={isLoaded}
 							remove={removeFullTableItem}
 							onClick={handleShow}
+							changeProduct={changeProductData}
+
 						/>
 					</Tab>
 					<Tab eventKey="newProduct"  title="Добавить новый товар ">
@@ -168,7 +179,7 @@ const EmployeePage = () => {
 
 				<Modal show={show} onHide={handleClose}>
 					<Modal.Header closeButton>
-						<Modal.Title>Изменить </Modal.Title>
+						<Modal.Title>Изменить</Modal.Title>
 					</Modal.Header>
 					<Modal.Body></Modal.Body>
 				</Modal>
