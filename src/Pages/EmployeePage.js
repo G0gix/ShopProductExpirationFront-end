@@ -10,8 +10,9 @@ import {
 	Modal,
 } from 'react-bootstrap';
 import { usePosts } from '../components/hooks/useTable'
-import ChangeProductTable  from '../components/ChangeProductTable/ChangeProductTable';
+import AddProductTable  from '../components/AddProductTable/AddProductTable';
 import "./PagesStyles/EmployeePage.css"
+import ChangeTable from "../components/ ChangeTable/ChangeTable";
 
 
 //#region UrlToFetch
@@ -53,8 +54,9 @@ const EmployeePage = () => {
 	const [fullDataToTable, setfullDataToTable] = useState([]);
 	const [ExpiredGoodsToTable, setExpiredGoodsToTable] = useState([]);
 	const [filter, setFilter] = useState({ sort: '', query: '' })
-	const [isLoaded, SetisLoaded] = useState(true);
+	const [changeTable, setChangeTable] = useState([])
 
+	const [isLoaded, SetisLoaded] = useState(true);
 	const [show, setShow] = useState(false);
 
 	//#endregion
@@ -106,7 +108,9 @@ const EmployeePage = () => {
 
 	//#region changeProductData
 	const changeProductData = (product) => {
-		alert(product);
+		let data = fullDataToTable.find(index => index.id === product)
+		setChangeTable(data);
+		console.log(changeTable);
 	}
 	//#endregion
 	//#endregion
@@ -172,16 +176,16 @@ const EmployeePage = () => {
 						/>
 					</Tab>
 					<Tab eventKey="newProduct"  title="Добавить новый товар ">
-						<ChangeProductTable />
+						<AddProductTable />
 					</Tab>
 				</Tabs>
-				<div style={{height:1500}}></div>
-
-				<Modal show={show} onHide={handleClose}>
+				<Modal fullscreen={true} size="lg" centered="true" show={show} onHide={handleClose}>
 					<Modal.Header closeButton>
 						<Modal.Title>Изменить</Modal.Title>
 					</Modal.Header>
-					<Modal.Body></Modal.Body>
+					<Modal.Body>
+						<ChangeTable data={changeTable}/>
+					</Modal.Body>
 				</Modal>
 			</div>
 		</div>

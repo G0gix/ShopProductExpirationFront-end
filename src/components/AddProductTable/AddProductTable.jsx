@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import { Table, Button, Modal, } from 'react-bootstrap';
-import "./ChangeProductTable.css";
+import "./AddProductTable.css";
 
 
-const ChangeProductTable = () => {
+const AddProductTable = () => {
 	const [tableData,setTableData ] =  useState(
 		{
 			productName:'',
@@ -139,7 +139,7 @@ const ChangeProductTable = () => {
 							   onChange={e => setTableData({...tableData,countUnits: e.target.value})}
 					/>
 					</td>
-					<td><input placeholder="Введите данныеtttt"
+					<td><input placeholder="Введите данные"
 							   className="input required"
 							   type="text"
 							   onChange={e => setTableData({...tableData,shopDepartment: e.target.value})}
@@ -193,4 +193,4 @@ const ChangeProductTable = () => {
 	);
 };
 
-export default ChangeProductTable;
+export default AddProductTable;

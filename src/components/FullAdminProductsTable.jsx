@@ -54,8 +54,9 @@ const FullAdminProductsTable = ({ tableColumnName, isLoaded, tableData, remove, 
 									>Удалить</Button>
 									<Button variant="warning"
 										onClick={() => {
+											changeProduct(user.id)
 											onClick()
-											changeProduct(user.id)}
+										}
 										}
 									>Изменить</Button>
 								</td>
