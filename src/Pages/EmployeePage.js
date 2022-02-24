@@ -78,7 +78,12 @@ const EmployeePage = () => {
 
 	//#region updateDataInTable
 	const updateDataInTable = (e) => {
-		fetchData();
+		try {
+			fetchData();
+			alert("Таблица обновлена")
+		}catch (e) {
+			alert("Ошибка неВозможно обновить таблицу!")
+		}
 	}
 	//#endregion
 
@@ -117,49 +122,58 @@ const EmployeePage = () => {
 	//#endregion
 
 	return (
-		<div style={{marginTop:150}}>
-			<Button variant="success"
-					onClick={dbSignOut}
-			>Выйти</Button>
-
-			<div className="updateTableButton">
-				<Button onClick={updateDataInTable} variant="outline-primary">Обновить таблицу</Button>
+		<div>
+			<div className="signOutButton__container">
+				<Button  variant="light"
+						onClick={dbSignOut}
+						className = "signOutButton"
+				>Выйти</Button>
 			</div>
-
-			<Tabs defaultActiveKey="profile"
-				id="uncontrolled-tab-example"
-				className="mb-3 Tabs"
-				style={{ marginTop: "60px" }}
-			>
-				<Tab eventKey="home" title="Полный список товаров">
-					<FullAdminProductsTable tableColumnName={tableColumnName}
-						tableData={sortedAndSeachedTable}
-						isLoaded={isLoaded}
-						remove={removeFullTableItem}
-						onClick={handleShow}
-					/>
-				</Tab>
-				<Tab eventKey="profile" title="Список просроченного товара">
-					<FullAdminProductsTable tableColumnName={tableColumnName}
-						tableData={sortedExpiredGoodsToTable}
-						isLoaded={isLoaded}
-						remove={removeFullTableItem}
-						onClick={handleShow}
-					/>
-				</Tab>
-				<Tab eventKey="newProduct"  title="Добавить новый товар ">
-					<ChangeProductTable />
-				</Tab>
-			</Tabs>
+			<div style={{marginTop:150}}>
 
 
-			<Modal show={show} onHide={handleClose}>
-				<Modal.Header closeButton>
-					<Modal.Title>Изменить </Modal.Title>
-				</Modal.Header>
-				<Modal.Body></Modal.Body>
-			</Modal>
-		</div >
+				<div className="updateButton__container">
+					<Button onClick={updateDataInTable}
+							variant="success"
+							className="updateButton"
+					>Обновить таблицу</Button>
+				</div>
+
+
+				<Tabs defaultActiveKey="profile"
+					id="uncontrolled-tab-example"
+					className="mb-3 Tabs"
+				>
+					<Tab eventKey="home" title="Полный список товаров">
+						<FullAdminProductsTable tableColumnName={tableColumnName}
+							tableData={sortedAndSeachedTable}
+							isLoaded={isLoaded}
+							remove={removeFullTableItem}
+							onClick={handleShow}
+						/>
+					</Tab>
+					<Tab eventKey="profile" title="Список просроченного товара">
+						<FullAdminProductsTable tableColumnName={tableColumnName}
+							tableData={sortedExpiredGoodsToTable}
+							isLoaded={isLoaded}
+							remove={removeFullTableItem}
+							onClick={handleShow}
+						/>
+					</Tab>
+					<Tab eventKey="newProduct"  title="Добавить новый товар ">
+						<ChangeProductTable />
+					</Tab>
+				</Tabs>
+				<div style={{height:1500}}></div>
+
+				<Modal show={show} onHide={handleClose}>
+					<Modal.Header closeButton>
+						<Modal.Title>Изменить </Modal.Title>
+					</Modal.Header>
+					<Modal.Body></Modal.Body>
+				</Modal>
+			</div>
+		</div>
 	);
 };
 

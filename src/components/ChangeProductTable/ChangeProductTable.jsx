@@ -172,11 +172,7 @@ const ChangeProductTable = () => {
 				</tr>
 			</tbody>
 		</Table >
-
 			<Button onClick={showData} >Добавить</Button>
-
-
-
 			<Modal show={show} onHide={handleClose}>
 				<Modal.Header closeButton>
 					<Modal.Title>

@@ -1,0 +1,30 @@
+.Tabs{
+    margin-top: 10px !important;
+}
+.updateButton__container{
+    width: 100vw;
+    display: flex;
+    justify-content: flex-end;
+}
+.updateButton{
+    display: block;
+    width: 200px !important;
+    margin-right: 20px;
+}
+
+.signOutButton__container{
+    position: fixed;
+    background-color: rgba(13,110,253) !important;
+    width: 100vw;
+    height: 50px;
+    top: 56px;
+    display: flex;
+    justify-content: flex-end;
+
+}
+.signOutButton{
+    width: 200px;
+    display: block !important;
+    margin-right: 20px !important;
+    margin-bottom: 10px;
+}
