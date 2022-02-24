@@ -31,8 +31,20 @@ const AddProductTable = ({data}) => {
                 let json = JSON.stringify(tableData);
                 console.log(json);
 
-                // let dsdsd = await  fetch(`https://localhost:44396/product/?Id=${tableData.id}&productName=${tableData.productName}&productManufacturingDate=${tableData.productManufacturingDate}&productPackagingDate=2022-02-13T14:00:00&shelfLife=1&timeUnits=дЕНТ&sellBy=2022-02-11T00:00:00&productCount=30&countUnits=шТУК&shopDepartment=ФЫВ&departmentHeadFio=ФЫВ&rowNumber=20&shelvingNumber=30&shelfNumber=20`,{method:"PUT"})
-                let createNewProductFetch = await fetch(`https://localhost:44396/product/?Id=${tableData.id}&productName=${tableData.productName}&productManufacturingDate=${tableData.productManufacturingDate}&productPackagingDate=${tableData.productPackagingDate}&shelfLife=${tableData.shelfLife}&timeUnits=${tableData.timeUnits}&sellBy=${tableData.sellBy}&productCount=${tableData.productCount}&countUnits=${tableData.countUnits}&shopDepartment=${tableData.shopDepartment}&departmentHeadFio=${tableData.departmentHeadFio}&rowNumber=${tableData.rowNumber}&shelvingNumber=${tableData.shelvingNumber}&shelfNumber=${tableData.shelfNumber}`,
+                let createNewProductFetch = await fetch(`https://localhost:44396/product/?Id=${tableData.id}
+                &productName=${tableData.productName}
+                &productManufacturingDate=${tableData.productManufacturingDate}
+                &productPackagingDate=${tableData.productPackagingDate}
+                &shelfLife=${tableData.shelfLife}
+                &timeUnits=${tableData.timeUnits}
+                &sellBy=${tableData.sellBy}
+                &productCount=${tableData.productCount}
+                &countUnits=${tableData.countUnits}
+                &shopDepartment=${tableData.shopDepartment}
+                &departmentHeadFio=${tableData.departmentHeadFio}
+                &rowNumber=${tableData.rowNumber}
+                &shelvingNumber=${tableData.shelvingNumber}
+                &shelfNumber=${tableData.shelfNumber}`,
                     {method: "PUT"});
                 alert("Продукт Обновлён");
 
