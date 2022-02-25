@@ -22,10 +22,12 @@ const Login = () => {
 			setincorrectData("Логин и Пароль не должны быть пусты");
 		} else {
 			setincorrectData("");
-			let getAccess = await fetch(`https://localhost:44396/account/?userName=${login}&password=${password}`, { method: "GET" });
+			let getAccess = await fetch(`https://localhost:44396/token?username=${login}&password=${password}`, { method: "POST",
+				credentials: "same-origin" });
 
 			if (getAccess.ok) {
 				let accessData = await getAccess.json();
+				sessionStorage.setItem("accessToken", accessData.access_token);
 				signin(accessData, () => navigate("/employeePage", { replace: true }))
 			} else {
 				setincorrectData("Неверный логин или пароль")
@@ -37,10 +39,7 @@ const Login = () => {
 		setPasswordShown(!passwordShown);
 	};
 
-
-
 	return (
-
 		<div className='Login'>
 			<div className="LogIn__container">
 				<form className='container__form'

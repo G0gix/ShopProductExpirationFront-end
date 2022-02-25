@@ -94,15 +94,23 @@ const EmployeePage = () => {
 
 	//#region FuncFromAdminTable
 	//#region DeleteProductInDB
-	const removeFullTableItem = (product) => {
-		try {
-			let deleteProductInDB =  fetch(`https://localhost:44396/product/${product}`,{method:"DELETE"})
+	const removeFullTableItem = async (product) => {
+		let key = sessionStorage.getItem("accessToken")
+		debugger;
+		let deleteProductInDB =  await fetch(`https://localhost:44396/product/${product}`,
+			{method:"DELETE",headers:{
+				"Accept": "application/json",
+					"Authorization": "Bearer " + key,
+				}})
+		if (deleteProductInDB.ok)
+		{
 			setfullDataToTable(fullDataToTable.filter(p => p.id !== product));
 			setExpiredGoodsToTable(ExpiredGoodsToTable.filter(p => p.id !== product));
 			alert("Успешно удалено!")
-		}catch (e) {
+		}else {
 			alert("Ошибка!")
 		}
+
 	}
 	//#endregion
 
