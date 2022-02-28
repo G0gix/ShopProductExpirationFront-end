@@ -120,7 +120,8 @@ const EmployeePage = () => {
 	//#region dbSignOut
 	const dbSignOut = async () => {
 		debugger;
-		let dbSignOutFetch = await fetch(`https://localhost:44396/account/1`,{method:"GET"})
+		let dbSignOutFetch = await fetch(`https://localhost:44396/account/1`,{method:"GET",
+			credentials:"include" })
 		if (dbSignOutFetch.ok) {
 			signout(() => navigate("/", { replace: true }));
 		}else {
