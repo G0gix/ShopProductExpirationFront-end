@@ -22,7 +22,13 @@ const Login = () => {
 			setincorrectData("Логин и Пароль не должны быть пусты");
 		} else {
 			setincorrectData("");
-			let getAccess = await fetch(`https://localhost:44396/account/?userName=${login}&password=${password}`, { method: "GET" });
+			let getAccess = await fetch(`https://localhost:44396/account/?userName=${login}&password=${password}`, { method: "POST",
+				headers:{
+					Accept: 'application/json',
+					'Content-Type': 'API-Key"',
+				},
+				credentials: 'include',
+			});
 
 			if (getAccess.ok) {
 				let accessData = await getAccess.json();
